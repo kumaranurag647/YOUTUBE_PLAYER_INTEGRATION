@@ -24,7 +24,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/fullscreen_demo_name"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar">>
+            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
         </activity>
     </application>
 </manifest>
