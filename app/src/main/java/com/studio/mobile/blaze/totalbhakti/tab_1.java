@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -14,11 +15,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class tab_1 extends Fragment {
-
     private RecyclerView recyclerView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,7 +30,23 @@ public class tab_1 extends Fragment {
         Home_Adapter HA = new Home_Adapter(home_list);
         recyclerView.setAdapter(HA);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-      return v;
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean b) {
+
+            }
+        }
+        return v;
     }
 
    }

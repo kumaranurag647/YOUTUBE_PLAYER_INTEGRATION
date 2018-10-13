@@ -13,7 +13,8 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
 
     private List <two_image_views> list;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+
         public ImageButton B1 , B2;
 
          public MyViewHolder(View view) {

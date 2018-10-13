@@ -114,7 +114,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.AddFragmentPage(new tab_1(), "Home");
         adapter.AddFragmentPage(new Tab_2(), "TAB - 2");
         adapter.AddFragmentPage(new Tab_3(), "TAB - 3");
-        adapter.AddFragmentPage(new Tab_4(), "Favourites");
+        adapter.AddFragmentPage(new Tab_4(), "Tab - 4");
+        adapter.AddFragmentPage(new Tab_5(), "Tab - 5");
+        adapter.AddFragmentPage(new Tab_6(), "TAB - 6");
+        adapter.AddFragmentPage(new Tab_7(), "TAB - 7");
+        adapter.AddFragmentPage(new Tab_8(), "Favourites");
         viewPager.setAdapter(adapter);
     }
 

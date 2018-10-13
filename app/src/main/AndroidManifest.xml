@@ -11,8 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
-            <intent-filter>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
+
+              <intent-filter>
                 <action android:name="android.intent.action.MAIN"
                     />
 
@@ -21,7 +25,7 @@
         </activity>
         <activity
             android:name=".PlayVideoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/fullscreen_demo_name"
             android:screenOrientation="landscape"
             android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">

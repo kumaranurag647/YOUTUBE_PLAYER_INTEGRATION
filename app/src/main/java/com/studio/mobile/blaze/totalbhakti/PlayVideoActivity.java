@@ -12,6 +12,7 @@ import com.google.android.youtube.player.YouTubePlayerView;
  */
 
 public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
+
     private YouTubePlayerView playerView;
     private YouTubePlayer player;
     String videoId;
@@ -19,9 +20,9 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        videoId = getIntent().getStringExtra("videoId"); //How does it Function??
+        videoId = getIntent().getStringExtra("videoId");
         setContentView(R.layout.fullscreen_demo);
-        playerView = (YouTubePlayerView) findViewById(R.id.player);
+        playerView = findViewById(R.id.player);
         playerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
     }
 
@@ -29,14 +30,14 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
                                         boolean wasRestored) {
         this.player = player;
+
         // Specify that we want to handle fullscreen behavior ourselves.
         player.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_ALWAYS_FULLSCREEN_IN_LANDSCAPE);
-
+        player.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
         if (!wasRestored) {
             player.loadVideo(videoId);
             player.setFullscreen(true);
             player.setShowFullscreenButton(false);
-
         }
     }
 
