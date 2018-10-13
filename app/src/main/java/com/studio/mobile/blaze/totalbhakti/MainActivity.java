@@ -1,11 +1,18 @@
 package com.studio.mobile.blaze.totalbhakti;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.media.Image;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +22,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -23,7 +34,16 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    boolean internet_connection(){
+        //Check if connected to internet, output accordingly
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
+    }
     TabLayout my_tabs;
     ViewPager my_pages;
 
@@ -31,18 +51,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (internet_connection()) {
+            // if connection exists...!!
+            my_tabs = findViewById(R.id.tabs);
+            my_pages = findViewById(R.id.viewpager);
+            my_tabs.setupWithViewPager(my_pages);
+            Set_up_view_Pager(my_pages);
 
-        my_tabs = findViewById(R.id.tabs);
-        my_pages = findViewById(R.id.viewpager);
-        my_tabs.setupWithViewPager(my_pages);
-        Set_up_view_Pager(my_pages);
-        CollapsingToolbarLayout CTL = findViewById(R.id.collapsing_toolbar);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        CTL.setTitle("ANURAG");
-
+        } else {
+            CoordinatorLayout CL = findViewById(R.id.activity_main);
+            LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+            final View view = factory.inflate(R.layout.tap_to_retry, null);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000,1000);
+            layoutParams.topMargin = 1000;
+            layoutParams.leftMargin = 80;
+            CL.addView(view,layoutParams);
+            Button B = findViewById(R.id.tap_to_retry);
+            B.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = getIntent();
+                    finish();
+                    startActivity(i);
+                }
+            });
+        }
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 

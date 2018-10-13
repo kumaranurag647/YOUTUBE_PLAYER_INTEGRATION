@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LL"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="You're offline. Check your connection."
+       android:textColor="#637276"
+       android:layout_marginLeft="50dp"
+       android:layout_marginTop="40dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tap_to_retry"
+        android:textColor="#fff"
+        android:layout_marginTop="14.5dp"
+        android:padding="4dp"
+        android:layout_marginLeft="120dp"
+        android:text="TAP TO RETRY"
+        android:background="#2F92D0"
+        />
+</LinearLayout>

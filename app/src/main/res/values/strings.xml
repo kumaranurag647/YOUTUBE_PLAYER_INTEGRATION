@@ -5,7 +5,7 @@
     <string name="enter_fullscreen">Enter Fullscreen</string>
     <string name="landscape_fullscreen">Always fullscreen in landscape</string>
     <string name="fullscreen_demo_name">Custom Fullscreen Handling</string>
-
+    <string name="try_again">Reconnect</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
