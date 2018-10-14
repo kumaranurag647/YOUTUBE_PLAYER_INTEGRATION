@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public class tab_1 extends Fragment {
     private RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -27,25 +29,11 @@ public class tab_1 extends Fragment {
       home_list.add(new two_image_views(R.drawable.no_thumbnail,R.drawable.no_thumbnail));
       home_list.add(new two_image_views(R.drawable.no_thumbnail,R.drawable.no_thumbnail));
       home_list.add(new two_image_views(R.drawable.no_thumbnail,R.drawable.no_thumbnail));
-        Home_Adapter HA = new Home_Adapter(home_list);
+      ViewPager VP = getActivity().findViewById(R.id.viewpager);
+        Home_Adapter HA = new Home_Adapter(home_list,VP);
         recyclerView.setAdapter(HA);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                return false;
-            }
 
-            @Override
-            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean b) {
-
-            }
-        }
         return v;
     }
 

@@ -1,5 +1,6 @@
 package com.studio.mobile.blaze.totalbhakti;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,11 @@ import android.widget.ImageButton;
 
 import java.util.List;
 
-public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder> {
+public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder>{
 
 
     private List <two_image_views> list;
+    private ViewPager viewp;
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -25,16 +27,15 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
     }
 
 
-    public Home_Adapter(List <two_image_views> List) {
-        this.list = List;
+    public Home_Adapter(List <two_image_views> List , ViewPager VP) {
+        this.list = List; this.viewp = VP;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.home, parent, false);
-
-        return new MyViewHolder(itemView);
+               return new MyViewHolder(itemView);
     }
 
     @Override
@@ -42,11 +43,70 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
         two_image_views T = list.get(position);
         holder.B1.setImageResource(T.getID1());
         holder.B2.setImageResource(T.getID2());
-     }
+        switch (position) {
+            case 0:
+                holder.B1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(0);
+                    }
+                });
+                holder.B2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(1);
+                    }
+                });
+                break;
 
-    @Override
-    public int getItemCount() {
-        return list.size();
+            case 1:
+                holder.B1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(2);
+                    }
+                });
+                holder.B2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(3);
+                    }
+                });
+                break;
+            case 2:
+                holder.B1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(4);
+                    }
+                });
+                holder.B2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(5);
+                    }
+                });
+                break;
+            case 3:
+                holder.B1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewp.setCurrentItem(6);
+                    }
+                });
+                holder.B2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                      viewp.setCurrentItem(7,true);
+                    }
+                });
+        }
     }
+        @Override
+        public int getItemCount () {
+            return list.size();
+        }
+
+
 }
 

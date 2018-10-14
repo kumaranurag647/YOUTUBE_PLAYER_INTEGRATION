@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.AddFragmentPage(new Tab_7(), "TAB - 7");
         adapter.AddFragmentPage(new Tab_8(), "Favourites");
         viewPager.setAdapter(adapter);
+
     }
 
 
