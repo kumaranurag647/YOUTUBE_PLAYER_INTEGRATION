@@ -1,39 +1,34 @@
 package com.studio.mobile.blaze.totalbhakti;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.PopupMenu;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.support.v7.widget.Toolbar;
 
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
+
+    boolean isHideToolbarView = false;
+
     boolean internet_connection(){
         //Check if connected to internet, output accordingly
         ConnectivityManager cm =
@@ -46,19 +41,50 @@ public class MainActivity extends AppCompatActivity {
     }
     TabLayout my_tabs;
     ViewPager my_pages;
-
+    DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         if (internet_connection()) {
             // if connection exists...!!
             my_tabs = findViewById(R.id.tabs);
             my_pages = findViewById(R.id.viewpager);
             my_tabs.setupWithViewPager(my_pages);
             Set_up_view_Pager(my_pages);
+/*
+            final HeaderView toolbarHeaderView = findViewById(R.id.toolbar_header_view);
+            AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
 
-        } else {
+            toolbarHeaderView.bindTo("Larry Page", "Last seen today at 7.00PM");
+
+            appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+                @Override
+                public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                    int maxScroll = appBarLayout.getTotalScrollRange();
+                    float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+                    System.out.println("Anurag Kumar");
+                    if (percentage == 1f && isHideToolbarView) {
+                        toolbarHeaderView.setVisibility(View.VISIBLE);
+                        isHideToolbarView = !isHideToolbarView;
+
+                    } else if (percentage < 1f && !isHideToolbarView) {
+                        System.out.println("Rohit Grim");
+                        toolbarHeaderView.setVisibility(View.GONE);
+                        isHideToolbarView = !isHideToolbarView;
+                    }
+                }
+
+
+            });
+*/
+
+           }
+
+            else
+           {
             CoordinatorLayout CL = findViewById(R.id.activity_main);
             LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.tap_to_retry, null);
@@ -124,4 +150,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-}
+      public void nav_drawer_kholo(View view)
+    {
+        mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+
+      public void menu_dikhao(View view){
+
+             PopupMenu popup = new PopupMenu(this,view);
+              MenuInflater inflater = popup.getMenuInflater();
+              inflater.inflate(R.menu.actions, popup.getMenu());
+              popup.show();
+          }
+    }

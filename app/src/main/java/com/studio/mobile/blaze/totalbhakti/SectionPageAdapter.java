@@ -1,5 +1,5 @@
-package com.studio.mobile.blaze.totalbhakti;
 
+package com.studio.mobile.blaze.totalbhakti;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
