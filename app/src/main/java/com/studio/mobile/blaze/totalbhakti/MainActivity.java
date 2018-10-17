@@ -1,3 +1,4 @@
+
 package com.studio.mobile.blaze.totalbhakti;
 
 import android.content.Context;
@@ -5,8 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -27,33 +31,66 @@ import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    boolean isHideToolbarView = false;
+    // boolean isHideToolbarView = false;
 
-    boolean internet_connection(){
+    boolean internet_connection() {
         //Check if connected to internet, output accordingly
         ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         return isConnected;
     }
+
     TabLayout my_tabs;
     ViewPager my_pages;
     DrawerLayout mDrawerLayout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDrawerLayout = findViewById(R.id.drawer_layout);
         if (internet_connection()) {
             // if connection exists...!!
             my_tabs = findViewById(R.id.tabs);
             my_pages = findViewById(R.id.viewpager);
             my_tabs.setupWithViewPager(my_pages);
             Set_up_view_Pager(my_pages);
+            mDrawerLayout = findViewById(R.id.drawer_layout);
+            NavigationView NV = findViewById(R.id.nav_view);
+            NV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch(item.getItemId()) {
+
+                        case R.id.navigation_home:
+                            my_pages.setCurrentItem(0);
+                            break;
+
+                        case R.id.nav_rate:
+                            my_pages.setCurrentItem(0);
+                            break;
+
+                        case R.id.nav_feedback:
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("text/html");
+                            intent.putExtra(Intent.EXTRA_EMAIL, "pranjulsharma653@gmail.com");
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                            startActivity(Intent.createChooser(intent, "Send Email"));
+                            break;
+
+                        case R.id.nav_more_apps:
+
+                    }
+                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                }
+            });
 /*
             final HeaderView toolbarHeaderView = findViewById(R.id.toolbar_header_view);
             AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
@@ -80,18 +117,14 @@ public class MainActivity extends AppCompatActivity {
 
             });
 */
-
-           }
-
-            else
-           {
+        } else {
             CoordinatorLayout CL = findViewById(R.id.activity_main);
             LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.tap_to_retry, null);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000,1000);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
             layoutParams.topMargin = 1000;
             layoutParams.leftMargin = 80;
-            CL.addView(view,layoutParams);
+            CL.addView(view, layoutParams);
             Button B = findViewById(R.id.tap_to_retry);
             B.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -150,16 +184,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-      public void nav_drawer_kholo(View view)
-    {
+    public void nav_drawer_kholo(View view) {
         mDrawerLayout.openDrawer(GravityCompat.START);
     }
 
-      public void menu_dikhao(View view){
+    public void menu_dikhao(View view) {
 
-             PopupMenu popup = new PopupMenu(this,view);
-              MenuInflater inflater = popup.getMenuInflater();
-              inflater.inflate(R.menu.actions, popup.getMenu());
-              popup.show();
-          }
+        PopupMenu popup = new PopupMenu(this, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.actions, popup.getMenu());
+        popup.show();
     }
+
+
+}

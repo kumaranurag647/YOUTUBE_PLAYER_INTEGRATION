@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_more_apps"
+            android:title="More Apps" />
+        <item
+            android:id="@+id/nav_share"
             android:title="Share" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="Rate" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:title="More" />
+            android:id="@+id/nav_more_options"
+            android:title="More Options" />
         </group>
 </menu>
