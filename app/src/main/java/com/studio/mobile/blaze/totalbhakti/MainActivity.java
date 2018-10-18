@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
 
@@ -73,22 +74,42 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.nav_rate:
-                            my_pages.setCurrentItem(0);
-                            break;
+                             my_pages.setCurrentItem(0);
+                             break;
 
                         case R.id.nav_feedback:
-                            Intent intent = new Intent(Intent.ACTION_SEND);
-                            intent.setType("text/html");
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setType("message/rfc822");
                             intent.putExtra(Intent.EXTRA_EMAIL, "pranjulsharma653@gmail.com");
                             intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
                             startActivity(Intent.createChooser(intent, "Send Email"));
                             break;
 
-                        case R.id.nav_more_apps:
-
+                        case R.id.nav_moreapps :
+                            Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                            i.setData(Uri.parse("https://play.google.com/store"));
+                            startActivity(i);
                     }
                      mDrawerLayout.closeDrawer(GravityCompat.START);
                     return true;
+                }
+            });
+
+            ImageButton more_apps = findViewById(R.id.IB4);
+            ImageButton share = findViewById(R.id.IB3);
+            more_apps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://play.google.com/store"));
+                    startActivity(i);
+                }
+            });
+
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
 /*
@@ -193,6 +214,33 @@ public class MainActivity extends AppCompatActivity {
         PopupMenu popup = new PopupMenu(this, view);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.actions, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                  switch(item.getItemId())
+                {
+                  case R.id.disclaimer :
+                         Intent i = new Intent(getApplicationContext(),Disclaimer.class);
+                         startActivity(i);
+                         break;
+
+                  case R.id.privacy_policy :
+                        i = new Intent(getApplicationContext(),Privacy_Policy.class);
+                        startActivity(i);
+                        break;
+
+                  case R.id.feedback :
+                      Intent intent = new Intent(Intent.ACTION_VIEW);
+                      intent.setType("message/rfc822");
+                      intent.putExtra(Intent.EXTRA_EMAIL, "pranjulsharma653@gmail.com");
+                      intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                      startActivity(Intent.createChooser(intent, "Send Email"));
+                      break;
+
+                }
+                return true;
+            }
+        });
         popup.show();
     }
 

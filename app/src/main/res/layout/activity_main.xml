@@ -80,16 +80,36 @@
 
                     <ImageButton
                         android:id="@+id/IB1"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_alignLeft="@id/IMAGE"
-                        android:layout_alignParentTop="true"
-                        android:layout_margin="2dp"
+                        android:layout_width="15dp"
+                        android:layout_height="29dp"
                         android:background="@null"
-                        android:fitsSystemWindows="true"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="10dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ham_1"
+                        android:fitsSystemWindows="true"
+                        android:src="@drawable/baseline_menu_white_48dp"
                         android:onClick="nav_drawer_kholo"/>
+
+                    <ImageButton
+                        android:id="@+id/IB3"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:background="@null"
+                        android:layout_marginTop="9dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/baseline_share_white_48dp"
+                        android:layout_toLeftOf="@id/IB2"/>
+
+                    <ImageButton
+                        android:id="@+id/IB4"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:background="@null"
+                        android:layout_marginTop="9dp"
+                        android:scaleType="centerCrop"
+                        android:layout_marginRight="12dp"
+                        android:src="@drawable/baseline_extension_white_48dp"
+                        android:layout_toLeftOf="@id/IB3"/>
 
                     <ImageButton
                         android:id="@+id/IB2"
