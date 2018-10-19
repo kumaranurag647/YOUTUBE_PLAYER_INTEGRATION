@@ -11,36 +11,26 @@
       android:id="@+id/thumbnail"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_margin="15dp"
+      android:layout_marginRight="15dp"
+      android:layout_marginLeft="15dp"
+      android:layout_marginBottom="3dp"
       android:src="@drawable/placeholder2"
       android:adjustViewBounds="true"
       android:scaleType="centerCrop"
       android:background="@drawable/rroouunndd"/>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginLeft="25dp">
   <TextView
       android:id="@+id/text"
-      android:layout_width="300dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
       android:layout_marginTop="7dp"
+      android:layout_marginBottom="53dp"
+      android:background="@drawable/rroouunndd"
       android:padding="7dp"
       android:textAppearance="?android:attr/textAppearanceSmall"
       android:text="Anurag Kumar"
-      android:background="@drawable/rroouunndd"
-      android:textColor="#000"
-      android:paddingBottom="10dp"/>
-
-      <ImageButton
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:src="@drawable/heart"
-          android:background="@null"
-          android:layout_marginTop="8dp"
-          android:layout_marginLeft="15dp"
-          android:scaleType="centerCrop"/>
+      android:textColor="#000"/>
 </LinearLayout>
 
-</LinearLayout>
+

@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapter.MyViewHolder> {
 
+    final int AD_TYPE = 1;
+    final int CONTENT_TYPE = 2;
     Context context;
     List<VideoItem> data;
     LayoutInflater inflater;
@@ -33,28 +35,45 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
 
     @Override
     public YouVideoListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.video_list_item, parent, false);
-        MyViewHolder holder = new MyViewHolder(v);
-        return holder;
+        View v;
+        if(viewType == CONTENT_TYPE)
+          {
+              v = inflater.inflate(R.layout.video_list_item, parent, false);
+              MyViewHolder holder = new MyViewHolder(v);
+              return holder;
+          }
+
+       else
+         {
+             v = inflater.inflate(R.layout.admob, parent, false);
+             MyViewHolder holder = new MyViewHolder(v);
+             return holder;
+         }
     }
 
     @Override
     public void onBindViewHolder(YouVideoListAdapter.MyViewHolder holder, int position) {
 
-        try {
-            holder.titletextData.setText(data.get(position).getTitle());
-            holder.ThumbnailView.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
-            YouTubeThumbnailLoader loader = thumbnailViewToLoaderMap.get(holder.ThumbnailView);
-            if (loader == null) {
-                holder.ThumbnailView.setTag(data.get(position).getId());
-            } else {
-                holder.ThumbnailView.setImageResource(R.drawable.placeholder1);
-                loader.setVideo(data.get(position).getId());
-            }
-        } catch (Exception e) {
-        }
+       if(getItemViewType(position)== CONTENT_TYPE)
+         {
+             try {
+                 holder.titletextData.setText(data.get(position).getTitle());
+                 holder.ThumbnailView.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
+                 YouTubeThumbnailLoader loader = thumbnailViewToLoaderMap.get(holder.ThumbnailView);
+                 if (loader == null) {
+                     holder.ThumbnailView.setTag(data.get(position).getId());
+                 } else {
+                     holder.ThumbnailView.setImageResource(R.drawable.placeholder1);
+                     loader.setVideo(data.get(position).getId());
+                 }
+             } catch (Exception e) {
+             }
 
+         }
+        else
+          {
 
+          }
     }
 
     @Override
@@ -84,6 +103,8 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
         }
     }
 
+
+
     private final class ThumbnailListener implements
             YouTubeThumbnailView.OnInitializedListener,
             YouTubeThumbnailLoader.OnThumbnailLoadedListener {
@@ -112,4 +133,10 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
         public void onThumbnailError(YouTubeThumbnailView view, YouTubeThumbnailLoader.ErrorReason errorReason) {
             view.setImageResource(R.drawable.placeholder2);
         }}
+
+    @Override
+    public int getItemViewType(int position) {
+        if((position+1)%4==0) return AD_TYPE;
+        else return CONTENT_TYPE;
+    }
 }

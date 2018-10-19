@@ -48,13 +48,13 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
                 holder.B1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(0);
+                        viewp.setCurrentItem(1);
                     }
                 });
                 holder.B2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(1);
+                        viewp.setCurrentItem(2);
                     }
                 });
                 break;
@@ -63,13 +63,13 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
                 holder.B1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(2);
+                        viewp.setCurrentItem(3);
                     }
                 });
                 holder.B2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(3);
+                        viewp.setCurrentItem(4);
                     }
                 });
                 break;
@@ -77,13 +77,13 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
                 holder.B1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(4);
+                        viewp.setCurrentItem(5);
                     }
                 });
                 holder.B2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(5);
+                        viewp.setCurrentItem(6);
                     }
                 });
                 break;
@@ -91,13 +91,13 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
                 holder.B1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        viewp.setCurrentItem(6);
+                        viewp.setCurrentItem(7);
                     }
                 });
                 holder.B2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                      viewp.setCurrentItem(7,true);
+                      viewp.setCurrentItem(8,true);
                     }
                 });
         }

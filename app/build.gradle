@@ -34,5 +34,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.jakewharton:butterknife:7.0.1'
     implementation 'com.android.support:cardview-v7:26.1.0'
-
+    implementation 'com.google.android.gms:play-services-ads:17.0.0'
 }

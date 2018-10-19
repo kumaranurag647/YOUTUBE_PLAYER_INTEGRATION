@@ -4,6 +4,8 @@ package com.studio.mobile.blaze.totalbhakti;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -30,6 +32,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     // boolean isHideToolbarView = false;
@@ -48,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
     TabLayout my_tabs;
     ViewPager my_pages;
     DrawerLayout mDrawerLayout;
-
+    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         if (internet_connection()) {
             // if connection exists...!!
@@ -74,15 +86,23 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.nav_rate:
-                             my_pages.setCurrentItem(0);
+                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.studio.mobile.blaze.totalbhakti")));
                              break;
 
                         case R.id.nav_feedback:
-                            Intent intent = new Intent(Intent.ACTION_VIEW);
-                            intent.setType("message/rfc822");
-                            intent.putExtra(Intent.EXTRA_EMAIL, "pranjulsharma653@gmail.com");
-                            intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                            startActivity(Intent.createChooser(intent, "Send Email"));
+                            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                            intent.setType("text/plain");
+                            final PackageManager pm = getPackageManager();
+                            final List<ResolveInfo> matches = pm.queryIntentActivities(intent, 0);
+                            ResolveInfo best = null;
+                            for (final ResolveInfo info : matches)
+                                if (info.activityInfo.packageName.endsWith(".gm") ||
+                                        info.activityInfo.name.toLowerCase().contains("gmail")) best = info;
+                            if (best != null)
+                                intent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+                            intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { "pranjulsharma653@gmail.com" });
+                            startActivity(intent);
+
                             break;
 
                         case R.id.nav_moreapps :
@@ -109,7 +129,12 @@ public class MainActivity extends AppCompatActivity {
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    String shareBody = "Here is the share content body";
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 }
             });
 /*
@@ -193,13 +218,14 @@ public class MainActivity extends AppCompatActivity {
 
         SectionPageAdapter adapter = new SectionPageAdapter(getSupportFragmentManager());
         adapter.AddFragmentPage(new tab_1(), "Home");
-        adapter.AddFragmentPage(new Tab_2(), "TAB - 2");
-        adapter.AddFragmentPage(new Tab_3(), "TAB - 3");
-        adapter.AddFragmentPage(new Tab_4(), "Tab - 4");
-        adapter.AddFragmentPage(new Tab_5(), "Tab - 5");
-        adapter.AddFragmentPage(new Tab_6(), "TAB - 6");
-        adapter.AddFragmentPage(new Tab_7(), "TAB - 7");
-        adapter.AddFragmentPage(new Tab_8(), "Favourites");
+        adapter.AddFragmentPage(new Tab_2(), "TAB - 1");
+        adapter.AddFragmentPage(new Tab_3(), "TAB - 2");
+        adapter.AddFragmentPage(new Tab_4(), "Tab - 3");
+        adapter.AddFragmentPage(new Tab_5(), "Tab - 4");
+        adapter.AddFragmentPage(new Tab_6(), "TAB - 5");
+        adapter.AddFragmentPage(new Tab_7(), "TAB - 6");
+        adapter.AddFragmentPage(new Tab_8(), "Tab - 7");
+        adapter.AddFragmentPage(new Tab_9(), "Tab - 8");
         viewPager.setAdapter(adapter);
 
     }
@@ -230,11 +256,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                   case R.id.feedback :
-                      Intent intent = new Intent(Intent.ACTION_VIEW);
-                      intent.setType("message/rfc822");
-                      intent.putExtra(Intent.EXTRA_EMAIL, "pranjulsharma653@gmail.com");
-                      intent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                      startActivity(Intent.createChooser(intent, "Send Email"));
+                      final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                      intent.setType("text/plain");
+                      final PackageManager pm = getPackageManager();
+                      final List<ResolveInfo> matches = pm.queryIntentActivities(intent, 0);
+                      ResolveInfo best = null;
+                      for (final ResolveInfo info : matches)
+                          if (info.activityInfo.packageName.endsWith(".gm") ||
+                                  info.activityInfo.name.toLowerCase().contains("gmail")) best = info;
+                      if (best != null)
+                          intent.setClassName(best.activityInfo.packageName, best.activityInfo.name);
+                      intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { "pranjulsharma653@gmail.com" });
+                      startActivity(intent);
                       break;
 
                 }
