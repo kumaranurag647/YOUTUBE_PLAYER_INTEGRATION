@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.tap_to_retry, null);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(1000, 1000);
-            layoutParams.topMargin = 1000;
+            layoutParams.topMargin = 800;
             layoutParams.leftMargin = 80;
             CL.addView(view, layoutParams);
             Button B = findViewById(R.id.tap_to_retry);
@@ -226,6 +226,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+      /*  if(Activ)
+          {
+            mInterstitialAd.show();
+          } */
     }
 
     @Override
@@ -324,4 +333,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+             public void background_click(View v){
+
+                 Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                 i.setData(Uri.parse("https://play.google.com/store"));
+                 startActivity(i);
+             }
 }

@@ -73,6 +73,7 @@
                         <ImageView
                             android:id="@+id/IMAGE"
                             android:layout_width="match_parent"
+                            android:onClick="background_click"
                             android:layout_height="225dp"
                             android:fitsSystemWindows="true"
                             android:scaleType="centerCrop"

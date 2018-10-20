@@ -32,8 +32,6 @@ public class Tab_2 extends Fragment {
         LoadVideoTask mvoid=new LoadVideoTask(APP_URL, new LoadVideoTask.CallApiListener() {
             @Override
             public void onFinish(ArrayList<VideoItem> videoItems, Exception e, String nextPageToken) {
-                for(int i=3 ; i<videoItems.size() ; i+=4)
-                    videoItems.add(i,null);
                 mdatapter = new YouVideoListAdapter(getContext(),videoItems);
                 mdatalist.setAdapter(mdatapter);
                 mdatalist.setLayoutManager(new LinearLayoutManager(getContext()));

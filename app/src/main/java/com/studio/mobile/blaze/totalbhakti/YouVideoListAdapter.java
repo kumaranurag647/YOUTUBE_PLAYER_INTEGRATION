@@ -48,8 +48,6 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
 
     @Override
     public void onBindViewHolder(YouVideoListAdapter.MyViewHolder holder, int position) {
-
-
              try {
                  holder.titletextData.setText(data.get(position).getTitle());
                  holder.ThumbnailView.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
@@ -60,11 +58,9 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
                      holder.ThumbnailView.setImageResource(R.drawable.placeholder1);
                      loader.setVideo(data.get(position).getId());
                  }
+             } catch (Exception e) {
              }
 
-             catch (Exception e) {
-
-             }
 
 
     }

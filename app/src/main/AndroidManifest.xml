@@ -34,8 +34,12 @@
             android:label="@string/fullscreen_demo_name"
             android:screenOrientation="landscape"
             android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar" />
-        <activity android:name=".Disclaimer" />
-        <activity android:name=".Privacy_Policy"></activity>
+        <activity android:name=".Disclaimer"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Privacy_Policy"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
