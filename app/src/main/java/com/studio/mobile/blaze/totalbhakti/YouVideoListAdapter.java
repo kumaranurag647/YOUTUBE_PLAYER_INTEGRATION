@@ -7,6 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.NativeExpressAdView;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubeThumbnailLoader;
 import com.google.android.youtube.player.YouTubeThumbnailView;
@@ -17,8 +23,7 @@ import java.util.Map;
 
 public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapter.MyViewHolder> {
 
-    final int AD_TYPE = 1;
-    final int CONTENT_TYPE = 2;
+
     Context context;
     List<VideoItem> data;
     LayoutInflater inflater;
@@ -36,26 +41,15 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
     @Override
     public YouVideoListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
-        if(viewType == CONTENT_TYPE)
-          {
-              v = inflater.inflate(R.layout.video_list_item, parent, false);
+                  v = inflater.inflate(R.layout.video_list_item, parent, false);
               MyViewHolder holder = new MyViewHolder(v);
               return holder;
-          }
-
-       else
-         {
-             v = inflater.inflate(R.layout.admob, parent, false);
-             MyViewHolder holder = new MyViewHolder(v);
-             return holder;
-         }
     }
 
     @Override
     public void onBindViewHolder(YouVideoListAdapter.MyViewHolder holder, int position) {
 
-       if(getItemViewType(position)== CONTENT_TYPE)
-         {
+
              try {
                  holder.titletextData.setText(data.get(position).getTitle());
                  holder.ThumbnailView.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
@@ -66,14 +60,13 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
                      holder.ThumbnailView.setImageResource(R.drawable.placeholder1);
                      loader.setVideo(data.get(position).getId());
                  }
-             } catch (Exception e) {
              }
 
-         }
-        else
-          {
+             catch (Exception e) {
 
-          }
+             }
+
+
     }
 
     @Override
@@ -84,8 +77,6 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder {
         YouTubeThumbnailView ThumbnailView;
         TextView titletextData;
-
-
         public MyViewHolder(View itemView) {
             super(itemView);
             ThumbnailView = itemView.findViewById(R.id.thumbnail);
@@ -100,6 +91,8 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
 
                 }
             });
+
+
         }
     }
 
@@ -134,9 +127,5 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
             view.setImageResource(R.drawable.placeholder2);
         }}
 
-    @Override
-    public int getItemViewType(int position) {
-        if((position+1)%4==0) return AD_TYPE;
-        else return CONTENT_TYPE;
-    }
+
 }

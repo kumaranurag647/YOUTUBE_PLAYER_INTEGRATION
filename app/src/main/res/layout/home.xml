@@ -5,11 +5,15 @@
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="40dp"
+    android:layout_marginLeft="17dp"
     android:layout_marginBottom="30dp"
     android:layout_marginRight="25dp"
     android:layout_marginTop="20dp">
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <ImageButton
         android:id="@+id/button1"
         android:layout_width="140dp"
@@ -18,14 +22,38 @@
         android:src="@drawable/hills"
         android:background="@null"
         android:scaleType="centerCrop"/>
+      <TextView
+          android:id="@+id/T1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="40dp"
+          android:layout_marginRight="25dp"
+          android:layout_marginTop="3dp"
+          android:background="@drawable/rroouunndd"
+          android:text="Anurag"/>
+  </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/button2"
-        android:layout_width="140dp"
-        android:background="@null"
-        android:layout_height="140dp"
-        android:layout_marginLeft="15dp"
-        android:src="@drawable/hills"
-        android:scaleType="centerCrop"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="140dp"
+            android:background="@null"
+            android:layout_height="140dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/hills"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:id="@+id/T2"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/rroouunndd"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:text="Kumar"/>
+    </LinearLayout>
 
 </LinearLayout>

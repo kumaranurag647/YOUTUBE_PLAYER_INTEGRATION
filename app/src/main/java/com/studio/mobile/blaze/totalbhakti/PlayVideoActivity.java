@@ -1,7 +1,11 @@
 package com.studio.mobile.blaze.totalbhakti;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
@@ -16,6 +20,7 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
     private YouTubePlayerView playerView;
     private YouTubePlayer player;
     String videoId;
+    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,7 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
         setContentView(R.layout.fullscreen_demo);
         playerView = findViewById(R.id.player);
         playerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+
     }
 
     @Override
@@ -38,7 +44,8 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
             player.loadVideo(videoId);
             player.setFullscreen(true);
             player.setShowFullscreenButton(false);
-        }
+          }
+
     }
 
     @Override

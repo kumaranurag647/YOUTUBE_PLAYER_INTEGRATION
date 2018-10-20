@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class Tab_2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View v = inflater.inflate(R.layout.fragment_tab_1, container, false);
         mdatalist = v.findViewById(R.id.TAB);
         LoadVideoTask mvoid=new LoadVideoTask(APP_URL, new LoadVideoTask.CallApiListener() {

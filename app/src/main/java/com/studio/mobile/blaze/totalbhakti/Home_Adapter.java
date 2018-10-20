@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -17,12 +18,14 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageButton B1 , B2;
+        public ImageButton B1 , B2; public TextView T1 , T2;
 
          public MyViewHolder(View view) {
             super(view);
             B1 =  view.findViewById(R.id.button1);
             B2 =  view.findViewById(R.id.button2);
+            T1 = view.findViewById(R.id.T1);
+            T2 = view.findViewById(R.id.T2);
         }
     }
 
@@ -43,11 +46,14 @@ public class Home_Adapter extends RecyclerView.Adapter<Home_Adapter.MyViewHolder
         two_image_views T = list.get(position);
         holder.B1.setImageResource(T.getID1());
         holder.B2.setImageResource(T.getID2());
+        holder.T1.setText(T.getTX1());
+        holder.T2.setText(T.getTX2());
         switch (position) {
             case 0:
                 holder.B1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         viewp.setCurrentItem(1);
                     }
                 });

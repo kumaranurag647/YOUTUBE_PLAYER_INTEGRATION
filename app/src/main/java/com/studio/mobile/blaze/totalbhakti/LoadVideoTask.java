@@ -95,7 +95,7 @@ public class LoadVideoTask extends AsyncTask<Void, Void, Void> {
                 JSONObject jsonObject = new JSONObject(response);
                 JSONArray list = jsonObject.getJSONArray("items");
                 responseItems = new ArrayList<>();
-                for (int i = 0; i < list.length(); i++) {
+                 for (int i = 0; i < list.length(); i++) {
                     try {
                         JSONObject snippet = list.getJSONObject(i).getJSONObject("snippet");
                         String videoId = snippet.getJSONObject("resourceId").getString("videoId");

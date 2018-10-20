@@ -29,11 +29,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 
 import java.util.List;
@@ -41,7 +44,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     // boolean isHideToolbarView = false;
-
+     static int count = 0;
     boolean internet_connection() {
         //Check if connected to internet, output accordingly
         ConnectivityManager cm =
@@ -57,15 +60,44 @@ public class MainActivity extends AppCompatActivity {
     ViewPager my_pages;
     DrawerLayout mDrawerLayout;
     AdView mAdView;
-
+    InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+
+            @Override
+            public void onAdLoaded() {
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the interstitial ad is closed.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+        });
 
         if (internet_connection()) {
             // if connection exists...!!
@@ -73,6 +105,42 @@ public class MainActivity extends AppCompatActivity {
             my_pages = findViewById(R.id.viewpager);
             my_tabs.setupWithViewPager(my_pages);
             Set_up_view_Pager(my_pages);
+
+
+
+            final ImageView bkg =  findViewById(R.id.IMAGE);
+            my_pages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+                @Override
+                public void onPageSelected(int position) {
+
+                    count++;
+                    if(count==3) { count = 0; mInterstitialAd.show(); }
+
+                    switch(position){
+                        case 0 : bkg.setImageResource(R.drawable.motivation);
+                                 break;
+                        case 1 : bkg.setImageResource(R.drawable.no_thumbnail);
+                                 break;
+                        case 3 : bkg.setImageResource(R.drawable.motivation);
+                                 break;
+                        case 4 : bkg.setImageResource(R.drawable.no_thumbnail);
+                                 break;
+                        case 5 : bkg.setImageResource(R.drawable.motivation);
+                                 break;
+                        case 6 : bkg.setImageResource(R.drawable.no_thumbnail);
+                            break;
+                    }
+
+                }
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    // if you want some fade in / fade out anim, you may want the values provided here
+                }
+                @Override
+                public void onPageScrollStateChanged(int state) {
+                }
+            });
             mDrawerLayout = findViewById(R.id.drawer_layout);
             NavigationView NV = findViewById(R.id.nav_view);
             NV.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -137,33 +205,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 }
             });
-/*
-            final HeaderView toolbarHeaderView = findViewById(R.id.toolbar_header_view);
-            AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
+        }
 
-            toolbarHeaderView.bindTo("Larry Page", "Last seen today at 7.00PM");
-
-            appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-                @Override
-                public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                    int maxScroll = appBarLayout.getTotalScrollRange();
-                    float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
-                    System.out.println("Anurag Kumar");
-                    if (percentage == 1f && isHideToolbarView) {
-                        toolbarHeaderView.setVisibility(View.VISIBLE);
-                        isHideToolbarView = !isHideToolbarView;
-
-                    } else if (percentage < 1f && !isHideToolbarView) {
-                        System.out.println("Rohit Grim");
-                        toolbarHeaderView.setVisibility(View.GONE);
-                        isHideToolbarView = !isHideToolbarView;
-                    }
-                }
-
-
-            });
-*/
-        } else {
+        else
+            {
             CoordinatorLayout CL = findViewById(R.id.activity_main);
             LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.tap_to_retry, null);
@@ -246,7 +291,8 @@ public class MainActivity extends AppCompatActivity {
                   switch(item.getItemId())
                 {
                   case R.id.disclaimer :
-                         Intent i = new Intent(getApplicationContext(),Disclaimer.class);
+
+                      Intent i = new Intent(getApplicationContext(),Disclaimer.class);
                          startActivity(i);
                          break;
 
