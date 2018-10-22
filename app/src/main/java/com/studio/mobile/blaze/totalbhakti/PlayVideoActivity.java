@@ -9,12 +9,6 @@ import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-
-
-/**
- * Created by Hp-pc on 01-Apr-18.
- */
-
 public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
 
     private YouTubePlayerView playerView;
