@@ -52,11 +52,7 @@ public class YouVideoListAdapter extends RecyclerView.Adapter<YouVideoListAdapte
                  holder.titletextData.setText(data.get(position).getTitle());
                  holder.ThumbnailView.initialize(DeveloperKey.DEVELOPER_KEY, thumbnailListener);
                  YouTubeThumbnailLoader loader = thumbnailViewToLoaderMap.get(holder.ThumbnailView);
-
                      holder.ThumbnailView.setTag(data.get(position).getId());
-                     holder.ThumbnailView.setImageResource(R.drawable.placeholder1);
-                     loader.setVideo(data.get(position).getId());
-
              } catch (Exception e) {
              }
 

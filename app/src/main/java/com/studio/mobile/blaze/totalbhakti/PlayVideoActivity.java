@@ -1,5 +1,6 @@
 package com.studio.mobile.blaze.totalbhakti;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -8,6 +9,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+
+import static android.os.SystemClock.sleep;
 
 public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
 
@@ -81,10 +84,16 @@ public class PlayVideoActivity extends YouTubeFailureRecoveryActivity{
         return playerView;
     }
 
-
     @Override
-    protected void onStop() {
-        super.onStop();
+    public void onBackPressed() {
+        super.onBackPressed();
         mInterstitialAd.show();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
     }
+
+
+
+
+
 }

@@ -4,6 +4,7 @@ package com.studio.mobile.blaze.totalbhakti;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
@@ -228,14 +229,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-      /*  if(Activ)
-          {
-            mInterstitialAd.show();
-          } */
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -329,8 +322,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        popup.show();
-    }
+      popup.show();
+  }
 
 
              public void background_click(View v){
@@ -339,4 +332,5 @@ public class MainActivity extends AppCompatActivity {
                  i.setData(Uri.parse("https://play.google.com/store"));
                  startActivity(i);
              }
+
 }
