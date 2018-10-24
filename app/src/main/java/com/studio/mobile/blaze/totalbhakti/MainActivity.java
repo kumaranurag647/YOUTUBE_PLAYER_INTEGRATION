@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
             my_tabs.setupWithViewPager(my_pages);
             Set_up_view_Pager(my_pages);
 
-
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
 
             final ImageView bkg =  findViewById(R.id.IMAGE);
             my_pages.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -224,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = getIntent();
                     finish();
                     startActivity(i);
-                }
+                 }
             });
         }
     }
@@ -237,25 +239,35 @@ public class MainActivity extends AppCompatActivity {
             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.exit_main_activity, null);
+            ImageView I = view.findViewById(R.id.image_view);
+            I.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://play.google.com/store"));
+                    startActivity(i);
+                }
+            });
+
             builder.setView(view);
-            builder.setMessage("Do you want to exit ?");
-            builder.setCancelable(true);
-            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+            final AlertDialog exit = builder.create();
+            Button B1 = view.findViewById(R.id.cancel);
+            Button B2 = view.findViewById(R.id.exit_action_);
+           B1.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   exit.dismiss();
+               }
+           });
 
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
+           B2.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   finish();
+               }
+           });
 
-            AlertDialog exit = builder.create();
-            exit.show();
+           exit.show();
         }
         return true;
     }
